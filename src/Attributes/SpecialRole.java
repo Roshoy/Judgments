@@ -1,4 +1,4 @@
-package Atributes;
+package Attributes;
 
 public enum SpecialRole {
     PRESIDING_JUDGE, // przewodniczacy składu sędziowskiego

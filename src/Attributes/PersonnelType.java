@@ -1,4 +1,4 @@
-package Atributes;
+package Attributes;
 
 public enum PersonnelType {
     ONE_PERSON, // skład jednoosobowy

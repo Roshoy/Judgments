@@ -1,4 +1,4 @@
-package Atributes;
+package Attributes;
 
 public enum JudgmentType {
     DECISION, // postanowienie

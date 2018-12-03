@@ -1,20 +1,16 @@
-package Atributes;
+package Attributes;
 
-public enum CourtType {
-    COMMON, // sąd powszechny
-    SUPREME, // Sąd Najwyższy
-    ADMINISTRATIVE, // sąd administracyjny
+public enum SourceCode {
+    COMMON_COURT, // sąd powszechny
+    SUPREME_COURT, // Sąd Najwyższy
     CONSTITUTIONAL_TRIBUNAL, // Trybunał Konstytucyjny
     NATIONAL_APPEAL_CHAMBER; // Krajowa Izba Odwoławcza
-
     public String toString(){
         switch(this){
-            case COMMON:
-                return "COMMON";
-            case SUPREME:
-                return "SUPREME";
-            case ADMINISTRATIVE:
-                return "ADMINISTRATIVE";
+            case COMMON_COURT:
+                return "COMMON_COURT";
+            case SUPREME_COURT:
+                return "SUPREME_COURT";
             case CONSTITUTIONAL_TRIBUNAL:
                 return "CONSTITUTIONAL_TRIBUNAL";
             case NATIONAL_APPEAL_CHAMBER:
@@ -22,5 +18,4 @@ public enum CourtType {
         }
         return "NON";
     }
-
 }
