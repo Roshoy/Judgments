@@ -4,7 +4,7 @@ import org.json.simple.JSONObject;
 
 import java.util.Date;
 
-public class JudgmentSource implements IJudgmentAttribute{
+public class JudgmentSource extends JudgmentAttribute{
     SourceCode code;
     String judgmentUrl;
     String judgmentId;
@@ -12,12 +12,20 @@ public class JudgmentSource implements IJudgmentAttribute{
     String reviser;
     Date publicationDate;
 
-    public void read(JSONObject object){
-        this.code = AttributesParser.sourceCodeParser((String)object.get("code"));
-        this.judgmentUrl = (String)object.get("judgmentUrl");
-        this.publisher = (String)object.get("publisher");
-        this.judgmentId = (String)object.get("judgmentId");
-        this.reviser = (String)object.get("reviser");
-        this.publicationDate = (Date)object.get("publicationDate");
+    private String identifier = "source";
+
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    public static JudgmentAttribute read(JSONObject object){
+        JudgmentSource source = new JudgmentSource();
+        source.code = AttributesParser.sourceCodeParser((String)object.get("code"));
+        source.judgmentUrl = (String)object.get("judgmentUrl");
+        source.publisher = (String)object.get("publisher");
+        source.judgmentId = (String)object.get("judgmentId");
+        source.reviser = (String)object.get("reviser");
+        source.publicationDate = (Date)object.get("publicationDate");
+        return source;
     }
 }

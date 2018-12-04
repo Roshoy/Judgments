@@ -2,20 +2,21 @@ package Attributes;
 
 import org.json.simple.JSONObject;
 
-public class Regulation implements IJudgmentAttribute{
+public class Regulation extends JudgmentAttribute{
     public String journalTitle = "";
     public int journalYear;
     public int journalNo;
     public int journalEntry;
     public String text = "";
 
-    public void read(JSONObject object){
-        this.journalTitle = (String)object.get("journalTitle");
-        this.journalYear = (int)(long)object.get("journalYear");
-        this.journalNo = (int)(long)object.get("journalNo");
-        this.journalEntry = (int)(long)object.get("journalEntry");
-        this.text = (String)object.get("text");
-        //return this;
+    public static JudgmentAttribute read(JSONObject object){
+        Regulation regulation = new Regulation();
+        regulation.journalTitle = (String)object.get("journalTitle");
+        regulation.journalYear = (int)(long)object.get("journalYear");
+        regulation.journalNo = (int)(long)object.get("journalNo");
+        regulation.journalEntry = (int)(long)object.get("journalEntry");
+        regulation.text = (String)object.get("text");
+        return regulation;
     }
 
 }

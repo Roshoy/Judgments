@@ -6,19 +6,27 @@ import org.json.simple.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CourtCase implements IJudgmentAttribute {
+public class CourtCase extends JudgmentAttribute {
     public String caseNumber = new String();
     public boolean generated = false;
     public List<Long> judgmentIds = new ArrayList<>();
 
+    private String identifier = "courtCase";
 
-    public void read(JSONObject object){
-        this.caseNumber = (String)object.get("caseNumber");
-        this.generated = (boolean)object.get("generated");
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    public static JudgmentAttribute read(JSONObject object){
+        CourtCase courtCase = new CourtCase();
+
+        courtCase.caseNumber = (String)object.get("caseNumber");
+        courtCase.generated = (boolean)object.get("generated");
         JSONArray objArray = (JSONArray) object.get("judgmentIds");
         for(Object obj: objArray){
-            this.judgmentIds.add((Long)obj);
+            courtCase.judgmentIds.add((Long)obj);
         }
+        return courtCase;
     }
 
     @Override

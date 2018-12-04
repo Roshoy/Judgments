@@ -6,18 +6,26 @@ import org.json.simple.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Judge implements IJudgmentAttribute {
+public class Judge extends JudgmentAttribute {
     public String name;
     public String function;
     public List<SpecialRole> specialRoles = new ArrayList<>();
 
-    public void read(JSONObject object){
-        this.name = (String)object.get("name");
-        this.function = (String)object.get("function");
+    private String identifier = "judges";
+
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    public static JudgmentAttribute read(JSONObject object){
+        Judge judge = new Judge();
+        judge.name = (String)object.get("name");
+        judge.function = (String)object.get("function");
         JSONArray objArray = (JSONArray) object.get("specialRoles");
         for(Object obj: objArray){
-            this.specialRoles.add((SpecialRole) obj);
+            judge.specialRoles.add((SpecialRole) obj);
         }
+        return judge;
     }
 
     @Override
