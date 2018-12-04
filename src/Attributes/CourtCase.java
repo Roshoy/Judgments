@@ -11,15 +11,13 @@ public class CourtCase extends JudgmentAttribute {
     public boolean generated = false;
     public List<Long> judgmentIds = new ArrayList<>();
 
-    private String identifier = "courtCase";
-
-    public String getIdentifier() {
-        return identifier;
+     public CourtCase(){
+        this.identifier = "referencedCourtCases";
     }
 
-    public static JudgmentAttribute read(JSONObject object){
+    public IJudgmentAttribute read(JSONObject object){
         CourtCase courtCase = new CourtCase();
-
+        System.out.println((String)object.get("caseNumber"));
         courtCase.caseNumber = (String)object.get("caseNumber");
         courtCase.generated = (boolean)object.get("generated");
         JSONArray objArray = (JSONArray) object.get("judgmentIds");

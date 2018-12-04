@@ -11,19 +11,16 @@ public class Judge extends JudgmentAttribute {
     public String function;
     public List<SpecialRole> specialRoles = new ArrayList<>();
 
-    private String identifier = "judges";
-
-    public String getIdentifier() {
-        return identifier;
+    public Judge(){
+        identifier = "judges";
     }
-
-    public static JudgmentAttribute read(JSONObject object){
+    public JudgmentAttribute read(JSONObject object){
         Judge judge = new Judge();
         judge.name = (String)object.get("name");
         judge.function = (String)object.get("function");
         JSONArray objArray = (JSONArray) object.get("specialRoles");
         for(Object obj: objArray){
-            judge.specialRoles.add((SpecialRole) obj);
+            judge.specialRoles.add(AttributesParser.specialRoleParser((String)obj));
         }
         return judge;
     }

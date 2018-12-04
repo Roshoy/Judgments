@@ -10,7 +10,11 @@ public class Opinion extends JudgmentAttribute {
     public String textContent = new String();
     public List<String> authors = new ArrayList<>();
 
-    public static JudgmentAttribute read(JSONObject object){
+    public Opinion(){
+        identifier = "dissentingOpinions";
+    }
+
+    public JudgmentAttribute read(JSONObject object){
         Opinion opinion = new Opinion();
         opinion.textContent = (String)object.get("textContent");
         JSONArray objArray = (JSONArray) object.get("authors");

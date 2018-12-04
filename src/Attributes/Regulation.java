@@ -9,7 +9,11 @@ public class Regulation extends JudgmentAttribute{
     public int journalEntry;
     public String text = "";
 
-    public static JudgmentAttribute read(JSONObject object){
+    public Regulation(){
+        identifier = "referencedRegulations";
+    }
+
+    public JudgmentAttribute read(JSONObject object){
         Regulation regulation = new Regulation();
         regulation.journalTitle = (String)object.get("journalTitle");
         regulation.journalYear = (int)(long)object.get("journalYear");
