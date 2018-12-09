@@ -1,10 +1,12 @@
-package main;
+package Judgments;
 
+import SharedObjects.IBaseChangeObserver;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -17,9 +19,11 @@ public class JudgmentReader {
     private JSONParser parser = new JSONParser();
     private int judgmentsCount = 0;
     private JSONArray  itemsArray = new JSONArray();
-    public List<Judgment> judgments = new ArrayList<>();
+    private List<Judgment> judgments = new ArrayList<>();
+    private JudgmentFactory  judgmentFactory;
 
-    public JudgmentReader(String path){
+    public JudgmentReader(String path, IBaseChangeObserver observer){
+        judgmentFactory= new JudgmentFactory(observer);
         this.direction = path;
     }
 
@@ -33,23 +37,22 @@ public class JudgmentReader {
         return this.judgments;
     }
 
-    public void readArray(String path)throws ParseException, IOException {
+    private void readArray(String path)throws ParseException, IOException {
         JSONObject object = (JSONObject)this.parser.parse(new FileReader(path));
         this.itemsArray = (JSONArray)object.get("items");
         this.judgmentsCount = this.itemsArray.size();
     }
 
-    public void readAllItems(){
+    private void readAllItems(){
         for(int i=0; i<this.judgmentsCount; i++){
             this.readSingleItem(i);
         }
     }
 
-    public void readSingleItem(int i){
+    private void readSingleItem(int i){
         JSONObject item = (JSONObject)this.itemsArray.get(i);
         //System.out.println((String)item.get("courtType"));
-        Judgment judgment = new Judgment();
-        judgment.readJudgment(item);
+        Judgment judgment = judgmentFactory.createJudgmentFromJSONObject(item);
         this.judgments.add(judgment);
     }
 }

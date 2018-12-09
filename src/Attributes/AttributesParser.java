@@ -35,7 +35,7 @@ public class AttributesParser {
     }
 
     public static PersonnelType personnelTypeParser(String arg){
-
+        if(arg==null)return null;
         switch(arg){
             case "ONE_PERSON":
                 return PersonnelType.ONE_PERSON;

@@ -3,11 +3,11 @@ package Attributes;
 import org.json.simple.JSONObject;
 
 public class Regulation extends JudgmentAttribute{
-    public String journalTitle = "";
-    public int journalYear;
-    public int journalNo;
-    public int journalEntry;
-    public String text = "";
+    private String journalTitle = "";
+    private int journalYear;
+    private int journalNo;
+    private int journalEntry;
+    private String text = "";
 
     public Regulation(){
         identifier = "referencedRegulations";
@@ -23,4 +23,38 @@ public class Regulation extends JudgmentAttribute{
         return regulation;
     }
 
+    @Override
+
+    public boolean equals(Object obj) {
+        if(obj == null) return false;
+        if(!(obj instanceof Regulation)) return false;
+        return ((Regulation) obj).getJournalNo() == this.getJournalNo() &&
+                ((Regulation) obj).getJournalYear() == this.getJournalYear() &&
+                ((Regulation) obj).getJournalEntry() == this.getJournalEntry();
+    }
+
+    @Override
+    public int hashCode() {
+        return this.getJournalEntry() *5101 + this.getJournalYear() *5101^2 + this.getJournalNo() *5101^3;
+    }
+
+    public String getJournalTitle() {
+        return journalTitle;
+    }
+
+    public int getJournalYear() {
+        return journalYear;
+    }
+
+    public int getJournalNo() {
+        return journalNo;
+    }
+
+    public int getJournalEntry() {
+        return journalEntry;
+    }
+
+    public String getText() {
+        return text;
+    }
 }
