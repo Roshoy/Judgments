@@ -30,6 +30,7 @@ public class JudgmentFactory {
         result.setCourtCases(readAttributeList(new CourtCase("courtCases")));
         result.setReferencedCourtCases(readAttributeList(new CourtCase("referencedCourtCases")));
         result.setJudges(readAttributeList(new Judge()));
+        updateJudges(result);
         result.getSource().read((JSONObject) object.get("source"));
         result.setCourtReporters(readStringList("courtReporters"));
         result.setDecision((String) object.get("decision"));
@@ -59,6 +60,7 @@ public class JudgmentFactory {
         if(this.object.containsKey("dissentingOpinions"))
             result.setDissentingOpinions(readAttributeList(new Opinion()));
         result.setJudgmentDate(readDate("judgmentDate"));
+        updateRegulations(result);
 
         return result;
     }
@@ -67,11 +69,23 @@ public class JudgmentFactory {
         JSONArray objArray = (JSONArray) this.object.get(template.getIdentifier());
         for(Object obj: objArray){
             IJudgmentAttribute temp = template.read((JSONObject)obj);
+            temp = observer.updateBase(temp);
             attributes.add(temp);
-            observer.updateBase(temp);
         }
 
         return attributes;
+    }
+
+    private void updateJudges(Judgment judgment){
+        for(IJudgmentAttribute judge: judgment.getJudges()){
+            ((Judge)judge).judgmentsIds.add(judgment.getId());
+        }
+    }
+
+    private void updateRegulations(Judgment judgment){
+        for(IJudgmentAttribute regulation: judgment.getReferencedRegulations()){
+            ((Regulation)regulation).judgmentsIds.add(judgment.getId());
+        }
     }
 
     private List<String> readStringList( String identifier){

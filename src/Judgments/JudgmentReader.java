@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 //JudgmentReader will read judgment
@@ -19,7 +20,7 @@ public class JudgmentReader {
     private JSONParser parser = new JSONParser();
     private int judgmentsCount = 0;
     private JSONArray  itemsArray = new JSONArray();
-    private List<Judgment> judgments = new ArrayList<>();
+    private HashMap<Long,Judgment> judgments = new HashMap<>();
     private JudgmentFactory  judgmentFactory;
 
     public JudgmentReader(String path, IBaseChangeObserver observer){
@@ -27,7 +28,7 @@ public class JudgmentReader {
         this.direction = path;
     }
 
-    public List<Judgment> readAllFiles()throws ParseException, IOException {
+    public HashMap<Long,Judgment> readAllFiles()throws ParseException, IOException {
         File direction = new File(this.direction);
         for (File judgmentsFile : direction.listFiles()) {
             System.out.println(judgmentsFile.getAbsolutePath());
@@ -53,6 +54,6 @@ public class JudgmentReader {
         JSONObject item = (JSONObject)this.itemsArray.get(i);
         //System.out.println((String)item.get("courtType"));
         Judgment judgment = judgmentFactory.createJudgmentFromJSONObject(item);
-        this.judgments.add(judgment);
+        this.judgments.put( judgment.getId(),judgment);
     }
 }

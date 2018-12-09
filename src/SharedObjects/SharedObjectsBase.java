@@ -8,23 +8,25 @@ import java.util.HashSet;
 
 public class SharedObjectsBase implements IBaseChangeObserver {
     //HashMap <Identifier of judgment attribute , HashSet <IJudgmentAttribute>> base
-    private HashMap<String, HashSet<IJudgmentAttribute>> base = new HashMap<>();
-    private HashSet<IJudgmentAttribute> courtCases = new HashSet<>(); // najpierw tylko courtcases ogarniam
+    private HashMap<String, HashMap<Integer,IJudgmentAttribute>> base = new HashMap<>();
 
     public SharedObjectsBase(){
-        base.put("courtCases",new HashSet<>());
-        base.put("referencedRegulations",new HashSet<>());
-        base.put("referencedCourtCases",new HashSet<>());
-        base.put("judges",new HashSet<>());
-        base.put("source",new HashSet<>());
+        base.put("courtCases",new HashMap<>());
+        base.put("referencedRegulations",new HashMap<>());
+        base.put("referencedCourtCases",new HashMap<>());
+        base.put("judges",new HashMap<>());
+        base.put("source",new HashMap<>());
 
     }
 
     @Override
-    public void updateBase(IJudgmentAttribute object) {
+    public IJudgmentAttribute updateBase(IJudgmentAttribute object) {
         if(!object.getIdentifier().equals("dissentingOpinions")) {
-           base.get(object.getIdentifier()).add(object);
+            if( base.get(object.getIdentifier()).containsKey(object.hashCode()))
+                return base.get(object.getIdentifier()).get(object.hashCode());
+           base.get(object.getIdentifier()).put(object.hashCode(),object);
         }
+        return object;
 
     }
 }

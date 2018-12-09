@@ -2,12 +2,16 @@ package Attributes;
 
 import org.json.simple.JSONObject;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class Regulation extends JudgmentAttribute{
     private String journalTitle = "";
     private int journalYear;
     private int journalNo;
     private int journalEntry;
     private String text = "";
+    public List<Long> judgmentsIds = new LinkedList<>();
 
     public Regulation(){
         identifier = "referencedRegulations";

@@ -4,12 +4,14 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Judge extends JudgmentAttribute {
     private String name;
     private String function;
     private List<SpecialRole> specialRoles = new ArrayList<>();
+    public List<Long> judgmentsIds = new LinkedList<>();
 
     public Judge(){
         identifier = "judges";
@@ -29,10 +31,13 @@ public class Judge extends JudgmentAttribute {
     public String toString() {
         String r = "";
         r = r + "Name: " + this.getName() + '\n';
-        r = r + "Function: " + this.getFunction() + '\n';
-        r += "Special Roles: ";
-        for(SpecialRole sr : this.getSpecialRoles()){
-            r = "/n- "+sr.toString();
+        if(!this.specialRoles.isEmpty()) {
+            r += "Special Roles: ";
+            for (SpecialRole sr : this.getSpecialRoles()) {
+                r += "\n  - " + sr.toString();
+            }
+        }else{
+            r+= "No special roles.";
         }
         return r;
     }
@@ -67,5 +72,9 @@ public class Judge extends JudgmentAttribute {
 
     public List<SpecialRole> getSpecialRoles() {
         return specialRoles;
+    }
+
+    public void setName(String name){
+        this.name = name;
     }
 }

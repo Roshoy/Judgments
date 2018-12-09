@@ -17,5 +17,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" exported="" name="jline:jline:3.0.0.M1" level="project" />
   </component>
 </module>
