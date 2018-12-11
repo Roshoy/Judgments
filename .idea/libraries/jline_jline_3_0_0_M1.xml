@@ -2,7 +2,7 @@
   <library name="jline:jline:3.0.0.M1" type="repository">
     <properties maven-id="jline:jline:3.0.0.M1" />
     <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/jline/jline/3.0.0.M1/jline-3.0.0.M1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jline-3.0.0.M1.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

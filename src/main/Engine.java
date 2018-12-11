@@ -6,6 +6,8 @@ import Operations.ShowRubrum;
 import SharedObjects.IBaseChangeObserver;
 import SharedObjects.SharedObjectsBase;
 import org.jline.reader.LineReader;
+import org.jline.reader.LineReaderBuilder;
+import org.jline.terminal.Terminal;
 import org.jline.terminal.TerminalBuilder;
 import org.json.simple.parser.ParseException;
 
@@ -21,10 +23,6 @@ public class Engine {
         HashMap<Long,Judgment> judgments;
         IBaseChangeObserver sharedObjectsBase = new SharedObjectsBase();
 
-        TerminalBuilder terminalBuilder = TerminalBuilder.builder();
-
-
-
 
 
         try {
@@ -33,8 +31,16 @@ public class Engine {
             JudgmentReader jr = new JudgmentReader(direction.getAbsolutePath(), sharedObjectsBase);
             judgments = jr.readAllFiles();
             System.out.println(new ShowRubrum(judgments).rubrum(38910));
-
-
+            ///////terminal use
+            Terminal terminal = TerminalBuilder.builder().system(true).build();
+            LineReader lineReader = LineReaderBuilder.builder().terminal(terminal).build();
+            Character mask = (args.length == 0) ? (char) 0: args[0].charAt(0); ////////????????
+            String command;
+            do {
+                command = lineReader.readLine("Enter command> ", mask);
+                System.out.println("Got command: " + command);
+            }
+            while (command != null && command.length() > 0);
         }catch(IOException | ParseException e){
             e.getMessage();
         }
