@@ -1,5 +1,7 @@
 package Judgments;
 
+import Attributes.CourtCase;
+import Attributes.IJudgmentAttribute;
 import SharedObjects.IBaseChangeObserver;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -20,7 +22,7 @@ public class JudgmentReader {
     private JSONParser parser = new JSONParser();
     private int judgmentsCount = 0;
     private JSONArray  itemsArray = new JSONArray();
-    private HashMap<Long,Judgment> judgments = new HashMap<>();
+    private HashMap<String,Judgment> judgments = new HashMap<>();
     private JudgmentFactory  judgmentFactory;
 
     public JudgmentReader(String path, IBaseChangeObserver observer){
@@ -28,7 +30,7 @@ public class JudgmentReader {
         this.direction = path;
     }
 
-    public HashMap<Long,Judgment> readAllFiles()throws ParseException, IOException {
+    public HashMap<String,Judgment> readAllFiles()throws ParseException, IOException {
         File direction = new File(this.direction);
         for (File judgmentsFile : direction.listFiles()) {
             System.out.println(judgmentsFile.getAbsolutePath());
@@ -54,6 +56,8 @@ public class JudgmentReader {
         JSONObject item = (JSONObject)this.itemsArray.get(i);
         //System.out.println((String)item.get("courtType"));
         Judgment judgment = judgmentFactory.createJudgmentFromJSONObject(item);
-        this.judgments.put( judgment.getId(),judgment);
+        for(String id: judgment.getCourtCases()) {
+            this.judgments.put(id, judgment);
+        }
     }
 }

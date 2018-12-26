@@ -27,7 +27,7 @@ public class JudgmentFactory {
         result.setId((long) object.get("id"));
         result.setCourtType(AttributesParser.courtTypeParser((String) object.get("courtType")));
         result.setJudgmentType(AttributesParser.judgmentTypeParser((String) object.get("judgmentType")));
-        result.setCourtCases(readAttributeList(new CourtCase("courtCases")));
+        result.setCourtCases(readStringList("courtCases"));
         result.setReferencedCourtCases(readAttributeList(new CourtCase("referencedCourtCases")));
         result.setJudges(readAttributeList(new Judge()));
         updateJudges(result);
@@ -40,25 +40,25 @@ public class JudgmentFactory {
         result.setReferencedRegulations(readAttributeList(new Regulation()));
         result.setKeywords(readStringList("keywords"));
         result.setReceiptDate(readDate("receiptDate"));
-        result.setMeansOfAppeal((String) object.get("meansOfAppeal"));
-        result.setJudgmentResult((String) object.get("judgmentResult"));
-
-        if(this.object.containsKey("judgmentForm"))
-            result.setJudgmentForm((String)((JSONObject)this.object.get("judgmentForm")).get("name"));
-
-        if(this.object.containsKey("chambers")) {
-            JSONArray objArray = (JSONArray) object.get("chambers");
-            for (Object obj : objArray) {
-                result.getChambers().add((int) (long) ((JSONObject) obj).get("id"));
-            }
-        }
-
-        result.setLowerCourtJudgments(readStringList("lowerCourtJudgments"));
-        result.setPersonnelType(AttributesParser.personnelTypeParser((String) object.get("personnelType")));
-        if(this.object.containsKey("divisionId"))
-            result.setDivisionID((Integer) ((JSONObject)object.get("divisionId")).get("id"));
-        if(this.object.containsKey("dissentingOpinions"))
-            result.setDissentingOpinions(readAttributeList(new Opinion()));
+//        result.setMeansOfAppeal((String) object.get("meansOfAppeal"));
+//        result.setJudgmentResult((String) object.get("judgmentResult"));
+//
+//        if(this.object.containsKey("judgmentForm"))
+//            result.setJudgmentForm((String)((JSONObject)this.object.get("judgmentForm")).get("name"));
+//
+//        if(this.object.containsKey("chambers")) {
+//            JSONArray objArray = (JSONArray) object.get("chambers");
+//            for (Object obj : objArray) {
+//                result.getChambers().add((int) (long) ((JSONObject) obj).get("id"));
+//            }
+//        }
+//
+//        result.setLowerCourtJudgments(readStringList("lowerCourtJudgments"));
+//        result.setPersonnelType(AttributesParser.personnelTypeParser((String) object.get("personnelType")));
+//        if(this.object.containsKey("divisionId"))
+//            result.setDivisionID((Integer) ((JSONObject)object.get("divisionId")).get("id"));
+//        if(this.object.containsKey("dissentingOpinions"))
+//            result.setDissentingOpinions(readAttributeList(new Opinion()));
         result.setJudgmentDate(readDate("judgmentDate"));
         updateRegulations(result);
 

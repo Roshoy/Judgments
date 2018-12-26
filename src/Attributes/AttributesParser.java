@@ -19,6 +19,9 @@ public class AttributesParser {
     }
 
     public static JudgmentType judgmentTypeParser(String arg){
+        for(JudgmentType jt:JudgmentType.values()){
+            if(jt.name().equals(jt))return jt;
+        }
         switch(arg){
             case "REASONS":
                 return JudgmentType.REASONS;

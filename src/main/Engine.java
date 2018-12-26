@@ -20,25 +20,28 @@ import java.util.List;
 
 public class Engine {
     public static void main(String[] args) {
-        HashMap<Long,Judgment> judgments;
+        HashMap<String,Judgment> judgments;
         IBaseChangeObserver sharedObjectsBase = new SharedObjectsBase();
-
-
 
         try {
             File direction = new File(args[0]);
 
             JudgmentReader jr = new JudgmentReader(direction.getAbsolutePath(), sharedObjectsBase);
             judgments = jr.readAllFiles();
-            System.out.println(new ShowRubrum(judgments).rubrum(38910));
+            //System.out.println(judgments.values().iterator().next());
+            //System.out.println(new ShowRubrum(judgments).rubrum(38910));
             ///////terminal use
+
+
             Terminal terminal = TerminalBuilder.builder().system(true).build();
             LineReader lineReader = LineReaderBuilder.builder().terminal(terminal).build();
-            Character mask = (args.length == 0) ? (char) 0: args[0].charAt(0); ////////????????
             String command;
+
             do {
-                command = lineReader.readLine("Enter command> ", mask);
+
+                command = lineReader.readLine("Enter command> ");
                 System.out.println("Got command: " + command);
+
             }
             while (command != null && command.length() > 0);
         }catch(IOException | ParseException e){

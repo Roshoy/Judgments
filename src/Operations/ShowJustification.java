@@ -4,13 +4,10 @@ import Judgments.Judgment;
 
 import java.util.HashMap;
 
-public class ShowJustification extends Operation{
-    public ShowJustification(HashMap<Long,Judgment> judgments){
-        setJudgments(judgments);
-    }
+public class ShowJustification{
 
-    public String justification(int id){
-        Judgment judgment = getJudgment(id);
+    public static String justification(String id, HashMap<String,Judgment> judgments){
+        Judgment judgment = judgments.get(id);
         return judgment.getTextContent();
     }
 }

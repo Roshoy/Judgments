@@ -8,7 +8,7 @@ public class Judgment {
     private long id = -1;
     private CourtType courtType;
     private JudgmentType judgmentType;
-    private List<IJudgmentAttribute> courtCases = new ArrayList<>();
+    private List<String> courtCases = new ArrayList<>();
     private List<IJudgmentAttribute> judges = new ArrayList<>();
     private JudgmentSource source = new JudgmentSource();
     private List<String> courtReporters = new ArrayList<>();
@@ -20,14 +20,14 @@ public class Judgment {
     private List<String> keywords = new ArrayList<>(); // how those keywords are built?
     private List<IJudgmentAttribute> referencedCourtCases = new ArrayList<>();
     private Date receiptDate = new Date();
-    private String meansOfAppeal = new String();
-    private String judgmentResult = new String();
-    private List<String> lowerCourtJudgments = new ArrayList<>();
-    private PersonnelType personnelType;
-    private String judgmentForm = new String();
-    private Integer divisionID = null;
-    private List<Integer> chambers = new ArrayList<>();
-    private List<IJudgmentAttribute> dissentingOpinions = new ArrayList<>();
+//    private String meansOfAppeal = new String();
+//    private String judgmentResult = new String();
+//    private List<String> lowerCourtJudgments = new ArrayList<>();
+//    private PersonnelType personnelType;
+//    private String judgmentForm = new String();
+//    private Integer divisionID = null;
+//    private List<Integer> chambers = new ArrayList<>();
+//    private List<IJudgmentAttribute> dissentingOpinions = new ArrayList<>();
     private Date judgmentDate = null;
 
 
@@ -51,14 +51,15 @@ public class Judgment {
         res += "keywords: " + this.getKeywords().size() + '\n';
         res += "referencedCourtCases: " + this.getReferencedRegulations().size() + '\n';
         res += "receiptDate: " + (this.getReceiptDate()).toString() + '\n';
-        res += "meansOfAppeal: " + this.getMeansOfAppeal() + '\n';
-        res += "judgmentResoult: " + this.getJudgmentResult() + '\n';
-        res += "lowerCourtJudgments: " + this.getLowerCourtJudgments().size() +'\n';
-        res += "personelType: " + this.getPersonnelType().toString() + '\n';
-        res += "judgmentForm: " + this.getJudgmentForm() + '\n';
-        res += "divisionId: " + this.getDivisionID() + '\n';
-        res += "chambers: " + this.getChambers().size() + '\n';
-        res += "dissentingOpinions: " + this.getDissentingOpinions().size() + '\n';
+//        res += "meansOfAppeal: " + this.getMeansOfAppeal() + '\n';
+//        res += "judgmentResoult: " + this.getJudgmentResult() + '\n';
+//        res += "lowerCourtJudgments: " + this.getLowerCourtJudgments().size() +'\n';
+//        if(this.getPersonnelType() != null)
+//            res += "personelType: " + this.getPersonnelType().toString() + '\n';
+//        res += "judgmentForm: " + this.getJudgmentForm() + '\n';
+//        res += "divisionId: " + this.getDivisionID() + '\n';
+//        res += "chambers: " + this.getChambers().size() + '\n';
+//        res += "dissentingOpinions: " + this.getDissentingOpinions().size() + '\n';
         res += "judgmentDate: " + this.getJudgmentDate().toString() + '\n';
 
         return res;
@@ -88,11 +89,11 @@ public class Judgment {
         this.judgmentType = judgmentType;
     }
 
-    public List<IJudgmentAttribute> getCourtCases() {
+    public List<String> getCourtCases() {
         return courtCases;
     }
 
-    public void setCourtCases(List<IJudgmentAttribute> courtCases) {
+    public void setCourtCases(List<String> courtCases) {
         this.courtCases = courtCases;
     }
 
@@ -183,70 +184,70 @@ public class Judgment {
     public void setReceiptDate(Date receiptDate) {
         this.receiptDate = receiptDate;
     }
-
-    public String getMeansOfAppeal() {
-        return meansOfAppeal;
-    }
-
-    public void setMeansOfAppeal(String meansOfAppeal) {
-        this.meansOfAppeal = meansOfAppeal;
-    }
-
-    public String getJudgmentResult() {
-        return judgmentResult;
-    }
-
-    public void setJudgmentResult(String judgmentResult) {
-        this.judgmentResult = judgmentResult;
-    }
-
-    public List<String> getLowerCourtJudgments() {
-        return lowerCourtJudgments;
-    }
-
-    public void setLowerCourtJudgments(List<String> lowerCourtJudgments) {
-        this.lowerCourtJudgments = lowerCourtJudgments;
-    }
-
-    public PersonnelType getPersonnelType() {
-        return personnelType;
-    }
-
-    public void setPersonnelType(PersonnelType personnelType) {
-        this.personnelType = personnelType;
-    }
-
-    public String getJudgmentForm() {
-        return judgmentForm;
-    }
-
-    public void setJudgmentForm(String judgmentForm) {
-        this.judgmentForm = judgmentForm;
-    }
-
-    public Integer getDivisionID() {
-        return divisionID;
-    }
-
-    public void setDivisionID(Integer divisionID) {
-        this.divisionID = divisionID;
-    }
-
-    public List<Integer> getChambers() {
-        return chambers;
-    }
-
-    public void setChambers(List<Integer> chambers) {
-        this.chambers = chambers;
-    }
-
-    public List<IJudgmentAttribute> getDissentingOpinions() {
-        return dissentingOpinions;
-    }
-
-    public void setDissentingOpinions(List<IJudgmentAttribute> dissentingOpinions) {
-        this.dissentingOpinions = dissentingOpinions;
-    }
+//
+//    public String getMeansOfAppeal() {
+//        return meansOfAppeal;
+//    }
+//
+//    public void setMeansOfAppeal(String meansOfAppeal) {
+//        this.meansOfAppeal = meansOfAppeal;
+//    }
+//
+//    public String getJudgmentResult() {
+//        return judgmentResult;
+//    }
+//
+//    public void setJudgmentResult(String judgmentResult) {
+//        this.judgmentResult = judgmentResult;
+//    }
+//
+//    public List<String> getLowerCourtJudgments() {
+//        return lowerCourtJudgments;
+//    }
+//
+//    public void setLowerCourtJudgments(List<String> lowerCourtJudgments) {
+//        this.lowerCourtJudgments = lowerCourtJudgments;
+//    }
+//
+//    public PersonnelType getPersonnelType() {
+//        return personnelType;
+//    }
+//
+//    public void setPersonnelType(PersonnelType personnelType) {
+//        this.personnelType = personnelType;
+//    }
+//
+//    public String getJudgmentForm() {
+//        return judgmentForm;
+//    }
+//
+//    public void setJudgmentForm(String judgmentForm) {
+//        this.judgmentForm = judgmentForm;
+//    }
+//
+//    public Integer getDivisionID() {
+//        return divisionID;
+//    }
+//
+//    public void setDivisionID(Integer divisionID) {
+//        this.divisionID = divisionID;
+//    }
+//
+//    public List<Integer> getChambers() {
+//        return chambers;
+//    }
+//
+//    public void setChambers(List<Integer> chambers) {
+//        this.chambers = chambers;
+//    }
+//
+//    public List<IJudgmentAttribute> getDissentingOpinions() {
+//        return dissentingOpinions;
+//    }
+//
+//    public void setDissentingOpinions(List<IJudgmentAttribute> dissentingOpinions) {
+//        this.dissentingOpinions = dissentingOpinions;
+//    }
 
     public Date getJudgmentDate() {
         return judgmentDate;

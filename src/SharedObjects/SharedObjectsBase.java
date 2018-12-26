@@ -11,7 +11,6 @@ public class SharedObjectsBase implements IBaseChangeObserver {
     private HashMap<String, HashMap<Integer,IJudgmentAttribute>> base = new HashMap<>();
 
     public SharedObjectsBase(){
-        base.put("courtCases",new HashMap<>());
         base.put("referencedRegulations",new HashMap<>());
         base.put("referencedCourtCases",new HashMap<>());
         base.put("judges",new HashMap<>());
@@ -21,7 +20,7 @@ public class SharedObjectsBase implements IBaseChangeObserver {
 
     @Override
     public IJudgmentAttribute updateBase(IJudgmentAttribute object) {
-        if(!object.getIdentifier().equals("dissentingOpinions")) {
+        if(!object.getIdentifier().equals("dissentingOpinions") && !object.getIdentifier().equals("courtCases")) {
             if( base.get(object.getIdentifier()).containsKey(object.hashCode()))
                 return base.get(object.getIdentifier()).get(object.hashCode());
            base.get(object.getIdentifier()).put(object.hashCode(),object);
