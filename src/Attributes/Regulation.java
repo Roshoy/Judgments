@@ -11,7 +11,7 @@ public class Regulation extends JudgmentAttribute{
     private int journalNo;
     private int journalEntry;
     private String text = "";
-    public List<Long> judgmentsIds = new LinkedList<>();
+    public List<String> judgmentsIds = new LinkedList<>();
 
     public Regulation(){
         identifier = "referencedRegulations";

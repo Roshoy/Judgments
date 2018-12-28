@@ -33,7 +33,6 @@ public class JudgmentReader {
     public HashMap<String,Judgment> readAllFiles()throws ParseException, IOException {
         File direction = new File(this.direction);
         for (File judgmentsFile : direction.listFiles()) {
-            System.out.println(judgmentsFile.getAbsolutePath());
             this.readArray(judgmentsFile.getAbsolutePath());
             this.readAllItems();
         }
@@ -54,7 +53,7 @@ public class JudgmentReader {
 
     private void readSingleItem(int i){
         JSONObject item = (JSONObject)this.itemsArray.get(i);
-        //System.out.println((String)item.get("courtType"));
+
         Judgment judgment = judgmentFactory.createJudgmentFromJSONObject(item);
         for(String id: judgment.getCourtCases()) {
             this.judgments.put(id, judgment);

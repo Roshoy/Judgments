@@ -4,11 +4,13 @@ import Attributes.IJudgmentAttribute;
 import Attributes.Judge;
 import Judgments.Judgment;
 
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 
-public class ShowRubrum{
+public class ShowRubrum extends AbstractOperation {
 //    umożliwiał wyświetlanie metryki (rubrum) orzeczenia o wybranej sygnaturze; metryka powinna zawierać:
 //    sygnaturę orzeczenia
 //    datę wydania orzeczenia
@@ -17,11 +19,13 @@ public class ShowRubrum{
 
 
 
-    public static String rubrum(String id, HashMap<String, Judgment> judgments){
+    private static String rubrum(String id, HashMap<String, Judgment> judgments){
+
+        if(!judgments.containsKey(id))return "Brak podanej sprawy o identyfikatorze: " + id;
         Judgment judgment = judgments.get(id);
         StringBuilder stringBuilder = new StringBuilder();
+
         stringBuilder.append("RUBRUM:\n");
-        stringBuilder.append("ID: " + judgment.getId() + '\n');
 
         Calendar cal = Calendar.getInstance();
         cal.setTime(judgment.getJudgmentDate());
@@ -34,6 +38,20 @@ public class ShowRubrum{
         }
 
         return stringBuilder.toString();
+    }
+
+    public static void run(String[] args, HashMap<String, Judgment> judgments, Path history) throws IOException {
+        String res;
+        if(args == null || args.length < 1){
+            res = "Za mało argumentów, co najmniej " + 1;
+            generateToOutput(res,history);
+            return;
+        }
+
+        for(String arg:args){
+            res = arg + ":\n" + ShowRubrum.rubrum(arg,judgments);
+            generateToOutput(res,history);
+        }
     }
 
 }

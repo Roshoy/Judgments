@@ -1,10 +1,9 @@
 package SharedObjects;
 
 import Attributes.IJudgmentAttribute;
-import Attributes.JudgmentAttribute;
 
 import java.util.HashMap;
-import java.util.HashSet;
+
 
 public class SharedObjectsBase implements IBaseChangeObserver {
     //HashMap <Identifier of judgment attribute , HashSet <IJudgmentAttribute>> base
@@ -12,20 +11,28 @@ public class SharedObjectsBase implements IBaseChangeObserver {
 
     public SharedObjectsBase(){
         base.put("referencedRegulations",new HashMap<>());
-        base.put("referencedCourtCases",new HashMap<>());
+//        base.put("referencedCourtCases",new HashMap<>());
         base.put("judges",new HashMap<>());
-        base.put("source",new HashMap<>());
+//        base.put("source",new HashMap<>());
 
     }
 
     @Override
     public IJudgmentAttribute updateBase(IJudgmentAttribute object) {
-        if(!object.getIdentifier().equals("dissentingOpinions") && !object.getIdentifier().equals("courtCases")) {
+        if(object.getIdentifier().equals("referencedRegulations") || object.getIdentifier().equals("judges")) {
             if( base.get(object.getIdentifier()).containsKey(object.hashCode()))
                 return base.get(object.getIdentifier()).get(object.hashCode());
            base.get(object.getIdentifier()).put(object.hashCode(),object);
         }
         return object;
 
+    }
+
+    public HashMap<Integer, IJudgmentAttribute> getRegulations(){
+        return base.get("referencedRegulations");
+    }
+
+    public HashMap<Integer, IJudgmentAttribute> getJudges() {
+        return base.get("judges");
     }
 }

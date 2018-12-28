@@ -11,7 +11,7 @@ public class Judge extends JudgmentAttribute {
     private String name;
     private String function;
     private List<SpecialRole> specialRoles = new ArrayList<>();
-    public List<Long> judgmentsIds = new LinkedList<>();
+    public List<String> judgmentsIds = new LinkedList<>();
 
     public Judge(){
         identifier = "judges";
