@@ -33,7 +33,10 @@ public class Engine {
     public static void main(String[] args) {
         HashMap<String,Judgment> judgments;
         IBaseChangeObserver sharedObjectsBase = new SharedObjectsBase();
-
+        if(args.length==0){
+            System.out.println("Za mało argumentów!");
+            return;
+        }
         try {
             ////////////////handling files
             File direction = new File(args[0]);

@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.concurrent.Callable;
 
 //JudgmentReader will read judgment
 public class JudgmentReader {
@@ -23,12 +24,13 @@ public class JudgmentReader {
         htmlJudgmentReader = new JudgmentReadFromHtml(judgments, observer);
     }
 
-    public HashMap<String,Judgment> readFromPath(String path)throws ParseException, IOException {
+    public synchronized HashMap<String,Judgment> readFromPath(String path)throws ParseException, IOException {
         File direction = new File(path);
         readAllFiles(direction);
 
         return this.judgments;
     }
+
 
     public void readAllFiles(File direction)throws ParseException, IOException {
 
