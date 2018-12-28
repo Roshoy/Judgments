@@ -48,7 +48,7 @@ public class CommandReader {
         if(words.length == 0)return;
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("[yyyy/MM/dd HH:mm:ss]");
         LocalDateTime now = LocalDateTime.now();
-        AbstractOperation.generateToFile(dtf.format(now) + " " + words[0],this.history);
+        if(this.history!=null)AbstractOperation.generateToFile(dtf.format(now) + " " + words[0],this.history);
         if(commandIsCorrect(words[0])){
             parseCommand(commandLine);
         }else{

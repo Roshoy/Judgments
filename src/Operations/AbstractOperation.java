@@ -14,7 +14,7 @@ public abstract class AbstractOperation {
 
         System.out.println(arg);
         // do pliku -> arg
-        generateToFile(arg,history);
+        if(history!=null) generateToFile(arg,history);
     }
 
     public static void generateToFile(String arg, Path history) throws IOException{
