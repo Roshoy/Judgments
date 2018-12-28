@@ -22,6 +22,13 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
+/*****************************************
+ * Należy uruchamiać przy pomocy terminalu komendą ([path] - miejsce gdzie jest katalog z projektem):
+ * java -cp "[path]\Judgments\out\production\Judgments;[path]\Judgments\lib\jansi-1.17.1.jar;[path]\Judgments\lib
+ * \jline-3.0.0.M1.jar;[path]\Judgments\lib\json-simple-1.1.1.jar;[path]\Judgments\lib\jsoup-1.11.3.jar" main.Engine C:\Users\Lenovo\JudgmentsFiles C:\Users\Lenovo\JudgmentsF
+ * iles\history.txt
+ */
+
 public class Engine {
     public static void main(String[] args) {
         HashMap<String,Judgment> judgments;
