@@ -17,7 +17,7 @@ public class Regulation extends JudgmentAttribute{
         identifier = "referencedRegulations";
     }
 
-    public JudgmentAttribute read(JSONObject object){
+    public JudgmentAttribute readFromJson(JSONObject object){
         Regulation regulation = new Regulation();
         regulation.journalTitle = (String)object.get("journalTitle");
         regulation.journalYear = (int)(long)object.get("journalYear");
@@ -39,12 +39,18 @@ public class Regulation extends JudgmentAttribute{
 
     @Override
     public int hashCode() {
-        return this.getJournalEntry() *5101 + this.getJournalYear() *5101^2 + this.getJournalNo() *5101^3;
+        int result=0;
+        for (int i = 0; i< this.journalTitle.length(); i++){
+            result += this.journalTitle.charAt(i)*73^(i);
+        }
+        return result;
     }
 
     public String getJournalTitle() {
         return journalTitle;
     }
+
+    public void setJournalTitle(String journalTitle){this.journalTitle = journalTitle; };
 
     public int getJournalYear() {
         return journalYear;

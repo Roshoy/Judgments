@@ -26,7 +26,9 @@ public class ShowRubrum extends AbstractOperation {
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.append("RUBRUM:\n");
-
+        for(String caseNumber: judgment.getCourtCases()){
+            stringBuilder.append(caseNumber + '\n');
+        }
         Calendar cal = Calendar.getInstance();
         cal.setTime(judgment.getJudgmentDate());
         stringBuilder.append("Data wydania orzeczenia: " + cal.get(Calendar.YEAR) + "-" + (cal.get(Calendar.MONTH)+1)
@@ -34,7 +36,7 @@ public class ShowRubrum extends AbstractOperation {
         stringBuilder.append("Rodzaj sądu: " + judgment.getCourtType() + '\n');
         stringBuilder.append("Sędziowie:\n");
         for(IJudgmentAttribute judge: judgment.getJudges()){
-            stringBuilder.append(judge.toString() + '\n');
+            stringBuilder.append(((Judge)judge).getName() + '\n');
         }
 
         return stringBuilder.toString();

@@ -18,7 +18,8 @@ public enum Command {
     COURTS,      //wyświetlał liczbę orzeczeń ze względu na typ sądu (rozkład statystyczny)
     REGULATIONS, //wyświetlał 10 najczęściej przywoływanych ustaw
     JURY,        //wyświetla liczbę orzeczeń na daną liczność składu sędziowskiego
-    HELP;
+    HELP,
+    EXIT;
 
     public void run(String[] args, HashMap<String, Judgment> judgments, IBaseChangeObserver commonDataBase,
                     Path history) throws IOException {
@@ -53,6 +54,9 @@ public enum Command {
                 break;
             case HELP:
                 ShowHelp.help(history);
+                break;
+            case EXIT:
+                break;
         }
     }
 

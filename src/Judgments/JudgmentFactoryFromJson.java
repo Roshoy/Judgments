@@ -4,7 +4,11 @@ import Attributes.*;
 import SharedObjects.IBaseChangeObserver;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 
+import javax.print.Doc;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,11 +17,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-class JudgmentFactory {
+
+class JudgmentFactoryFromJson {
     private JSONObject object;
     private IBaseChangeObserver observer;
 
-    public JudgmentFactory(IBaseChangeObserver observer){
+    public JudgmentFactoryFromJson(IBaseChangeObserver observer){
         this.observer = observer;
     }
 
@@ -29,7 +34,8 @@ class JudgmentFactory {
         result.setCourtCases(readCourtCasesList("courtCases"));
         result.setJudges(readAttributeList(new Judge()));
         updateJudges(result);
-        result.setTextContent((String) object.get("textContent"));
+        result.setTextContent(readTextContent((String) object.get("textContent")));
+
         result.setReferencedRegulations(readAttributeList(new Regulation()));
 
         result.setJudgmentDate(readDate("judgmentDate"));
@@ -37,12 +43,22 @@ class JudgmentFactory {
         return result;
     }
 
+    private String readTextContent(String text){
+        Document doc = Jsoup.parse(text);
+        //System.out.println(doc.text());
+        return doc.text();
+    }
+
     private List<IJudgmentAttribute> readAttributeList(JudgmentAttribute template){
         List<IJudgmentAttribute> attributes = new ArrayList<>();
         JSONArray objArray = (JSONArray) this.object.get(template.getIdentifier());
         for(Object obj: objArray){
-            IJudgmentAttribute temp = template.read((JSONObject)obj);
-            temp = observer.updateBase(temp);
+            IJudgmentAttribute temp = template.readFromJson((JSONObject)obj);
+            if(temp.getIdentifier().equals("referencedRegulations")) {
+                temp = observer.updateBaseRegulations(temp);
+            } else if(temp.getIdentifier().equals("judges")){
+                temp = observer.updateBaseJudges(temp);
+            }
             attributes.add(temp);
         }
 

@@ -31,11 +31,12 @@ public class Engine {
             ////////////////handling files
             File direction = new File(args[0]);
             System.out.println(args[0]);
+            //Path history = null;
             Path history = createHistoryFile(args);
 
             ///////////////reading json
-            JudgmentReader jr = new JudgmentReader(direction.getAbsolutePath(), sharedObjectsBase);
-            judgments = jr.readAllFiles();
+            JudgmentReader jr = new JudgmentReader(sharedObjectsBase);
+            judgments = jr.readFromPath(direction.getAbsolutePath());
 
             //////////////setting up interactive console
             Terminal terminal = TerminalBuilder.builder().system(true).build();
@@ -48,7 +49,8 @@ public class Engine {
                     "courts",      //wyświetlał liczbę orzeczeń ze względu na typ sądu (rozkład statystyczny)
                     "regulations", //wyświetlał 10 najczęściej przywoływanych ustaw
                     "jury",
-                    "help");
+                    "help",
+                    "exit");
             LineReader lineReader = LineReaderBuilder.builder().terminal(terminal).completer(completer).build();
             CommandReader commandReader = new CommandReader(judgments,sharedObjectsBase,history);
             //////////////using console
@@ -56,7 +58,7 @@ public class Engine {
                 command = lineReader.readLine("Enter command> ");
                 commandReader.readLine(command);
             }
-            while (command != null && command.length() > 0);
+            while (command != null && command.length() > 0 && !command.equals("exit"));
         }catch(IOException | ParseException e){
             System.out.println(e.getMessage());
         }finally {

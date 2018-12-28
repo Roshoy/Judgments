@@ -9,21 +9,15 @@ import java.util.List;
 
 public class Judge extends JudgmentAttribute {
     private String name;
-    private String function;
-    private List<SpecialRole> specialRoles = new ArrayList<>();
     public List<String> judgmentsIds = new LinkedList<>();
 
     public Judge(){
         identifier = "judges";
     }
-    public JudgmentAttribute read(JSONObject object){
+    public JudgmentAttribute readFromJson(JSONObject object){
         Judge judge = new Judge();
         judge.name = (String)object.get("name");
-        judge.function = (String)object.get("function");
         JSONArray objArray = (JSONArray) object.get("specialRoles");
-        for(Object obj: objArray){
-            judge.getSpecialRoles().add(AttributesParser.specialRoleParser((String)obj));
-        }
         return judge;
     }
 
@@ -31,14 +25,6 @@ public class Judge extends JudgmentAttribute {
     public String toString() {
         String r = "";
         r = r + "Name: " + this.getName() + '\n';
-        if(!this.specialRoles.isEmpty()) {
-            r += "Special Roles: ";
-            for (SpecialRole sr : this.getSpecialRoles()) {
-                r += "\n  - " + sr.toString();
-            }
-        }else{
-            r+= "No special roles.";
-        }
         return r;
     }
 
@@ -64,14 +50,6 @@ public class Judge extends JudgmentAttribute {
 
     public String getName() {
         return name;
-    }
-
-    public String getFunction() {
-        return function;
-    }
-
-    public List<SpecialRole> getSpecialRoles() {
-        return specialRoles;
     }
 
     public void setName(String name){

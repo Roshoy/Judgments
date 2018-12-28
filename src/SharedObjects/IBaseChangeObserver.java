@@ -3,5 +3,6 @@ package SharedObjects;
 import Attributes.IJudgmentAttribute;
 
 public interface IBaseChangeObserver {
-    IJudgmentAttribute updateBase(IJudgmentAttribute object);
+    IJudgmentAttribute updateBaseJudges(IJudgmentAttribute object);
+   IJudgmentAttribute updateBaseRegulations (IJudgmentAttribute object);
 }
